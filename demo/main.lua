@@ -1,3 +1,7 @@
+-- Error at: 160/215
+-- Strange polygon at: 166/249, 185/254
+-- ^-- appears to come from parallel stuff
+
 local polygonSegments = require "map"
 local fuzzyRadius = 10
 local uniquePoints
@@ -175,14 +179,21 @@ function love.update(dt)
                 table.insert(drawPolygons, triangle)
             end
         else
-            print(unpack(polygon))
+            -- print(unpack(polygon))
+            print("Could not triangulate polygon at: " .. love.mouse.getX() .. "/" .. love.mouse.getY())
         end
     end
 
-    love.window.setTitle("Demo (running at " .. love.timer.getFPS() .. " fps)")
+    love.window.setTitle("Demo (running at " .. love.timer.getFPS() .. " fps, mP: " .. love.mouse.getX() ..  "/" .. love.mouse.getY() .. ")")
 end
 
 function love.draw()
+
+    for _, point in ipairs(uniquePoints) do
+        love.graphics.setColor(0, 255, 0)
+        love.graphics.line(point[1], point[2], love.mouse.getX(), love.mouse.getY())
+    end
+
     for _, segment in ipairs(polygonSegments) do
         -- Draw polygon segments
         love.graphics.setColor(255, 0, 0)
