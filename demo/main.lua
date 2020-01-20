@@ -2,6 +2,8 @@
 -- Strange polygon at: 166/249, 185/254
 -- ^-- appears to come from parallel stuff
 
+-- https://ncase.me/sight-and-light/
+
 local polygonSegments = require "map"
 local fuzzyRadius = 10
 local uniquePoints
